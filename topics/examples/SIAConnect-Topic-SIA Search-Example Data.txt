@@ -1,0 +1,100 @@
+"Table": {
+                            "__metadata": {
+                                "type": "SP.SimpleDataTable"
+                            },
+                            "Rows": {
+                                "results": [
+                                    {
+                                        "__metadata": {
+                                            "type": "SP.SimpleDataRow"
+                                        },
+                                        "Cells": {
+                                            "results": [
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "WorkId",
+                                                    "Value": "2815642113151115543",
+                                                    "ValueType": "Edm.Int64"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "Rank",
+                                                    "Value": "1001.9580595",
+                                                    "ValueType": "Edm.Double"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "Title",
+                                                    "Value": "Albertsons-CI300X-Installation Guide",
+                                                    "ValueType": "Edm.String"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "Author",
+                                                    "Value": "Branch, William (Watertown);SharePoint Online",
+                                                    "ValueType": "Edm.String"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "Size",
+                                                    "Value": "8580326",
+                                                    "ValueType": "Edm.Int64"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "Path",
+                                                    "Value": "https://gloryglobal.sharepoint.com/sites/RGN-NAM-NA/Shared Documents/Albertsons/Albertsons-CI300X-Installation Guide.pdf",
+                                                    "ValueType": "Edm.String"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "Description",
+                                                    "Value": null,
+                                                    "ValueType": "Null"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "Write",
+                                                    "Value": "2025-01-28T17:59:51.0000000Z",
+                                                    "ValueType": "Edm.DateTime"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "CollapsingStatus",
+                                                    "Value": null,
+                                                    "ValueType": "Null"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "HitHighlightedSummary",
+                                                    "Value": "<ddd/><c0>Albertsons</c0> Installation Guide Revision 6.0 Page 1 of 82  CI-300BX <c0>Albertsons</c0> Installation <ddd/> <c0>Albertson’s</c0> CI-300BX with REV APP  CI-300BX <c0>Albertsons</c0> Installation Guide Revision 6.0 <ddd/>",
+                                                    "ValueType": "Edm.String"
+                                                },
+                                                {
+                                                    "__metadata": {
+                                                        "type": "SP.KeyValue"
+                                                    },
+                                                    "Key": "HitHighlightedProperties",
+                                                    "Value": null,
+                                                    "ValueType": "Null"
+                                                },
