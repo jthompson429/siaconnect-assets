@@ -1,0 +1,19 @@
+{
+  "results": [
+    {
+      "Title": "Albertsons-CI300X-Installation Guide",
+      "Summary": "CI-300X installation steps for Albertsons, including diagrams and site-specific configuration.",
+      "Path": "https://gloryglobal.sharepoint.com/sites/RGN-NAM-NA/Shared Documents/Albertsons/Albertsons-CI300X-Installation Guide.pdf"
+    },
+    {
+      "Title": "CI-100 Firmware Update Bulletin",
+      "Summary": "Bulletin outlining firmware update steps for CI-100 version 2.4.5 and above.",
+      "Path": "https://gloryglobal.sharepoint.com/sites/RGN-NAM-NA/Shared Documents/Bulletins/CI-100-Firmware-Update-Bulletin.pdf"
+    },
+    {
+      "Title": "Quantum System Troubleshooting Guide",
+      "Summary": "Step-by-step guide for resolving common Quantum platform issues.",
+      "Path": "https://gloryglobal.sharepoint.com/sites/RGN-NAM-NA/Shared Documents/Quantum/Quantum-Troubleshooting-Guide.pdf"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+kind: AdaptiveDialog
+modelDisplayName: Summarize File
+modelDescription: "This topic handles queries like: \"I want to upload a document to summarize\", \"Start document summarization\", \"begin summary process\", \"can I summarize a PDF?\"."
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  priority: 1
+  intent:
+    displayName: Summarize Document
+    triggerQueries:
+      - I want to upload a document to summarize
+      - Start document summarization
+      - begin summary process
+      - can I summarize a PDF?
+
+  actions:
+    - kind: SendActivity
+      id: sendActivity_jtjQci
+      activity: Sure thing! I can definitely help summarize a file for you.
+
+    - kind: Question
+      id: question_wf2w9H
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.userUploadedContent
+      prompt: Just send me the PDF or Word document you'd like me to summarize.
+      entity: FilePrebuiltEntity
+
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_DcF3AA
+      input:
+        binding:
+          file: =Topic.userUploadedContent
+          folderPath: https://gloryglobal-my.sharepoint.com/:f:/g/personal/thompsoj_us_glory-global_com/EjUYw2Niv2ZDmP34l_NXkggByX57p6C7pc-LZ0sAwtcoHQ?e=xV7Yvd
+          name: file_summary.pdf
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.CreateFile
+
+      connectionReference: cr144_siaNow.shared_onedriveforbusiness.shared-onedriveforbu-60bebb71-6e4b-4d92-b46b-51e0570f61e9
+      connectionProperties:
+        mode: Invoker
+
+      operationId: CreateFile
+
+    - kind: SendActivity
+      id: HMY0iZ
+      activity: Thank you! Let me get started summarizing your document.
+
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_WdokZ8
+      latencyMessageSettings:
+        allowLatencyMessage: true
+        latencyMessage: Analyzing...
+
+      input:
+        binding:
+          file: =Topic.CreateFile
+
+      output:
+        binding:
+          pdfsummary: Topic.pdfSummary
+
+      flowId: c05c9a92-9f0b-f011-bae1-7c1e5265170a
+
+    - kind: SendActivity
+      id: sendActivity_EOTBAv
+      activity: |-
+        Here's a summary of the document you uploaded:
+        {Topic.pdfSummary}
+
+inputType: {}
+outputType: {}
