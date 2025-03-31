@@ -121,3 +121,9 @@ beginDialog:
 
 inputType: {}
 outputType: {}
+
+
+
+
+
+body('Send_an_HTTP_request_to_SharePoint')?['d']['query']['PrimaryQueryResult']['RelevantResults']['Table']['Rows']['results']
