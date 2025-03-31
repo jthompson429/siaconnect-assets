@@ -1,1 +1,123 @@
+kind: AdaptiveDialog
+modelDescription: "This tool can handle queries like: 'search SIA', 'find a document', 'look up a manual', etc."
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  priority: 1
+  intent:
+    triggerQueries:
+      - search SIA
+      - find SIA information
+      - look up SIA details
+      - SIA search query
+      - search for SIA data
+      - SIA lookup
+      - get SIA info
+      - retrieve SIA records
+      - find a document
+      - find a guide
+      - find a manual
+      - search for a document
+      - find a tech bulletin
 
+  actions:
+    - kind: Question
+      id: question_searchPrompt
+      interruptionPolicy:
+        allowInterruption: true
+      variable: init:Global.siaSearchQuery
+      prompt: What would you like me to search for in SharePoint (SIA)?
+      entity: StringPrebuiltEntity
+
+    - kind: InvokeFlowAction
+      id: runSearchFlow
+      input:
+        binding:
+          text: =Global.siaSearchQuery
+      output:
+        binding:
+          siasearchresults: Topic.siaSearchResults
+      flowId: c378e2d9-6d06-f011-bae2-7c1e5265170a
+
+    # Optional branch for too many results (can be activated later)
+    - kind: ConditionGroup
+      id: tooManyResultsCheck
+      conditions:
+        - condition: =Topic.siaSearchResults.TooManyResults = true
+          actions:
+            - kind: SendActivity
+              activity: |
+                I found quite a few results for **"{Global.siaSearchQuery}"**.  
+                Want to narrow it down a bit for something more specific?
+            - kind: GotoAction
+              actionId: question_searchPrompt
+
+    - kind: ConditionGroup
+      id: hasResultsCheck
+      conditions:
+        - condition: =!IsBlank(Topic.siaSearchResults)
+          actions:
+            - kind: SendActivity
+              activity: |
+                Here’s what I found for **“{Global.siaSearchQuery}”**.  
+                Let me know if you want help refining the search or checking something else!
+
+      elseActions:
+        - kind: Question
+          id: askToRefine
+          interruptionPolicy:
+            allowInterruption: true
+          variable: init:Topic.WantsToRefine
+          prompt:
+            text:
+              - |
+                I couldn’t find anything matching **"{Global.siaSearchQuery}"**.  
+                Want to try again with more detail?
+            quickReplies:
+              - kind: MessageBack
+                text: Yes
+              - kind: MessageBack
+                text: No
+          entity: BooleanPrebuiltEntity
+
+        - kind: ConditionGroup
+          id: checkRefineChoice
+          conditions:
+            - condition: =Topic.WantsToRefine = true
+              actions:
+                - kind: GotoAction
+                  actionId: question_searchPrompt
+          elseActions:
+            - kind: BeginDialog
+              dialog: cr144_siaNow.topic.StartOver
+
+    - kind: Question
+      id: askAnotherSearch
+      interruptionPolicy:
+        allowInterruption: true
+      variable: init:Topic.WantsToSearchAgain
+      prompt:
+        text:
+          - |
+            Is there anything else you'd like to look up?  
+            I’m happy to run another search or point you in the right direction.
+        quickReplies:
+          - kind: MessageBack
+            text: Search again
+          - kind: MessageBack
+            text: No, I’m good
+      entity: BooleanPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: handleSearchLoop
+      conditions:
+        - condition: =Topic.WantsToSearchAgain = true
+          actions:
+            - kind: GotoAction
+              actionId: question_searchPrompt
+      elseActions:
+        - kind: BeginDialog
+          dialog: cr144_siaNow.topic.StartOver
+
+inputType: {}
+outputType: {}
