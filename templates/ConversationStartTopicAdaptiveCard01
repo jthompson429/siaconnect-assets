@@ -1,0 +1,33 @@
+{
+  '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+  type: "AdaptiveCard",
+  version: "1.5",
+  body: [
+    {
+      type: "Image",
+      url: "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/welcome.png",
+      size: "Stretch",
+      altText: "SIAConnect"
+    },
+    {
+      type: "TextBlock",
+      text: Topic.welcomeUser,
+      size: "Large",
+      weight: "Bolder",
+      horizontalAlignment: "Center",
+      spacing: "Medium"
+    },
+    {
+      type: "TextBlock",
+      text: "I’m *SIAConnect*, *your* document and knowledge assistant. I can help you find documents, knowledge base articles, and videos, or assist with document requests.",
+      spacing: "medium",
+      wrap: true
+    },
+    {
+      type: "TextBlock",
+      text: "You can type in what you would like to do, or choose from one of the suggestions.",
+      spacing: "medium",
+      wrap: true
+    }
+  ]
+}
