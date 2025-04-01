@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Office/Temp
+~$*
+*.tmp
+*.bak
+
+# Power Automate exports
+*.json.backup
+*.zip.backup
+*.preview
+
+# Python cache if ever used
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# Personal notes
+*.draft
