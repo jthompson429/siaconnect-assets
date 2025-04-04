@@ -1,0 +1,40 @@
+{
+  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+  "type": "AdaptiveCard",
+  "version": "1.5",
+  "body": [
+    {
+      "type": "TextBlock",
+      "text": "Here are some articles that match your selected category:",
+      "wrap": true,
+      "weight": "Bolder",
+      "size": "Medium"
+    },
+    {
+      "type": "Container",
+      "items": [
+        {
+          "type": "TextBlock",
+          "text": "**{Title}**",
+          "wrap": true
+        },
+        {
+          "type": "TextBlock",
+          "text": "{Summary}",
+          "wrap": true,
+          "spacing": "None"
+        },
+        {
+          "type": "ActionSet",
+          "actions": [
+            {
+              "type": "Action.OpenUrl",
+              "title": "Read More",
+              "url": "{URL}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
