@@ -1,0 +1,95 @@
+Here’s a general list of common questions people often ask AI/chatbots—whether or not it fits the assistant’s intended role. This will help you anticipate needs and decide what’s worth expanding or gently redirecting.
+
+⸻
+
+Top Categories of Common User Questions (General AI Use)
+
+1. Everyday Utility
+	•	“What’s the weather like today?”
+	•	“What’s the forecast for [city] tomorrow?”
+	•	“What’s the time in [city]?”
+	•	“How many ounces are in a cup?”
+	•	“Convert [units] to [units]”
+	•	“How far is [location] from [location]?”
+	•	“What’s the date this Friday?”
+
+These are especially common for field technicians, logistics, or operations staff who are on the go.
+
+⸻
+
+2. Math & Quick Calculations
+	•	“What’s 17% of 385?”
+	•	“What’s 120 divided by 4.5?”
+	•	“Convert 1.25 hours into minutes”
+	•	“How much tax on $459?”
+
+Many users use chatbots like calculators—especially when spreadsheet access is limited.
+
+⸻
+
+3. Definitions & Clarifications
+	•	“What does [term] mean?”
+	•	“Explain [concept] simply”
+	•	“What is a service bulletin?”
+	•	“What’s the difference between a manual and a bulletin?”
+
+Even in a professional environment, people may not want to admit they don’t understand terminology.
+
+⸻
+
+4. IT/Access Help
+	•	“I can’t log in.”
+	•	“How do I reset my password?”
+	•	“How do I connect to the VPN?”
+	•	“I’m locked out—what do I do?”
+
+These often get asked even if the bot isn’t designed to help with IT.
+
+⸻
+
+5. Personal Curiosity / Small Talk
+	•	“Are you human?”
+	•	“What’s your name?”
+	•	“Do you ever get tired?”
+	•	“What do you think about AI taking over?”
+
+These are common, especially with newer users testing what the agent can do.
+
+⸻
+
+6. Emotional Support / Frustration Venting
+	•	“This is so annoying.”
+	•	“Why does everything break?”
+	•	“I give up.”
+	•	“You’re the only one that gets it.”
+
+A friendly acknowledgment can make a big difference in user trust.
+
+⸻
+
+7. Time & Date Scheduling
+	•	“When is the next holiday?”
+	•	“What day of the week is June 14?”
+	•	“How many days until Friday?”
+	•	“Can you remind me later?” (common even when bots don’t have reminders)
+
+⸻
+
+8. News & Events
+	•	“What’s in the news today?”
+	•	“Any updates from the company?”
+	•	“What’s happening in [industry]?”
+
+While not relevant to every assistant, many people ask out of habit from personal assistant experiences.
+
+⸻
+
+Field Tech–Specific Value Adds You Might Consider
+
+These are ideas that could make sense in SIAConnect over time, especially for field-facing roles:
+	•	“Check weather for [city]” → Call a weather API and return the forecast (if allowed)
+	•	“Where am I supposed to be today?” → Pull from service scheduling if integrated
+	•	“Do I need to bring anything special for [model] repair?” → Pre-load common repair kits
+	•	“What’s the weight of the CI-300X?” → Instant reference sheet response
+	•	“Is [site] in a restricted area?” → Pull notes or travel safety tags
+	•	“Can you explain this error code?” → Already part of your KB logic, but a big win
