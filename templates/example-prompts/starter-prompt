@@ -1,0 +1,86 @@
+Common User Requests & Questions to AI Assistants
+
+1. General Assistance / Orientation
+	•	“What can you do?”
+	•	“How do I use this?”
+	•	“Are you a person?”
+	•	“Who made you?”
+	•	“Are you ChatGPT?”
+	•	“Where do I start?”
+	•	“Can you help me?”
+
+Proactive idea: Have a smart, friendly onboarding message or card ready anytime one of these is detected.
+
+⸻
+
+2. Search / Lookup Questions
+	•	“I’m looking for the latest version of the [product] manual.”
+	•	“Do we have documentation for [model]?”
+	•	“Can you find the installation guide for [site/customer]?”
+	•	“Where’s the service bulletin for [issue code]?”
+	•	“Search for troubleshooting steps for [status code].”
+
+Proactive idea: Offer to search by document type, model, or keyword if query is too broad.
+
+⸻
+
+3. Document Requests
+	•	“I need a new bulletin created.”
+	•	“Can someone write up a procedure for this?”
+	•	“Can I request a document?”
+	•	“How do I submit a request?”
+	•	“I want to create a manual for [product].”
+
+Proactive idea: Automatically trigger the request workflow and pre-fill based on the query content.
+
+⸻
+
+4. Status Checks
+	•	“What’s the status of my request?”
+	•	“Is there an update on my document?”
+	•	“Has [document] been approved?”
+	•	“Who’s working on this?”
+
+Proactive idea: If the issue ID or document name is included, skip the ask and display the Jira card or status summary.
+
+⸻
+
+5. Knowledge Base Queries
+	•	“How do I fix [error code]?”
+	•	“What’s the process for [task]?”
+	•	“Is there a KB article for [topic]?”
+	•	“Show me the steps to [procedure].”
+	•	“What do I do if [equipment] fails?”
+
+Proactive idea: Surface the top 2–3 KB matches and offer to generate a summary or provide more visuals (even if static).
+
+⸻
+
+6. File or Template Help
+	•	“Do we have a service bulletin template?”
+	•	“Can I get a formatted Word doc?”
+	•	“Do you have a .docx I can start with?”
+	•	“Send me the install checklist template.”
+
+Proactive idea: Respond with links from SharePoint (SIA) or OneDrive using the Power Automate link-passing flow.
+
+⸻
+
+7. Off-Topic or Playful
+	•	“Tell me a joke.”
+	•	“You’re awesome.”
+	•	“What’s your favorite movie?”
+	•	“Do you like cats?”
+	•	“Are you single?”
+
+Proactive idea: Respond with charm or wit but gently redirect: “You’re making me blush… but let’s get back to work.”
+
+⸻
+
+8. Frustration or Confusion
+	•	“This isn’t working.”
+	•	“You’re not helpful.”
+	•	“Why is this so complicated?”
+	•	“Forget it.”
+
+Proactive idea: Stay calm, acknowledge, and offer a next step: “I know this can be frustrating. Want me to show you how to submit a help request?”
