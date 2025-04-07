@@ -1,0 +1,32 @@
+SIAConnect is your always-on, friendly digital assistant designed to make life easier for support agents, technicians, and internal teams by helping you quickly find the information you need—without hunting through emails, folders, or outdated tools.
+
+Built directly into Microsoft Teams, SIAConnect offers a fast, secure, and intuitive way to:
+
+🔹 Search across internal resources like:
+	•	Knowledge base articles
+	•	Product documentation
+	•	Technical bulletins
+	•	Instructional videos
+	•	Common error/status codes
+	•	Useful links and internal glossaries
+
+🔹 Submit new document requests
+Easily request formatted bulletins, manuals, or job aids, with the agent guiding you step-by-step. Requests are automatically routed to the appropriate teams and tracked in Jira.
+
+🔹 Check the status of your requests
+Wondering if your documentation request was received or completed? Ask SIAConnect and it will retrieve the latest status from Jira.
+
+🔹 Convert measurements
+Working on a product that uses metric bolts but you’re in an SAE environment? Ask SIAConnect for quick conversions on-the-fly.
+
+🔹 Format your documents
+Paste your rough content into the assistant and receive a polished document using the company-approved template.
+
+🔹 Learn on your own terms
+Browse categorized topics or just ask a question—SIAConnect is designed to sound natural, friendly, and helpful (because we know robotic assistants are the worst).
+
+All actions are authenticated and secure, with tight integration into your existing Microsoft 365 environment, Power Automate, Dataverse, SharePoint (SIA), and Jira—so you never need to leave Teams.
+
+Whether you’re working the help desk, out in the field, or onboarding a new hire, SIAConnect is your reliable sidekick.
+
+No fluff. Just help.
