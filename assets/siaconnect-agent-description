@@ -1,2 +1,2 @@
-Description 
-SIAConnect is designed to streamline document and content management by enabling users to search for information across SharePoint, a knowledge base, and Vimeo. It facilitates document requests, status tracking, and automated formatting, all integrated with Jira and Power Automate for seamless workflow automation.
+Description
+SIAConnect is an internal AI assistant designed to help Glory employees quickly find product documentation, search knowledge base articles, format documents, and submit or check the status of content-related requests. Integrated into Microsoft Teams, it connects securely to internal resources such as SharePoint (SIA), Jira, Dataverse, and OneDrive to support productivity, field service, and support operations.
