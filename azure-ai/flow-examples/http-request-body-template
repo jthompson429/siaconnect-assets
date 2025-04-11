@@ -27,3 +27,10 @@ body('HTTP')?['choices']?[0]?['message']?['content']
 
 
 A 1/8 inch bolt has a diameter of approximately 3.175 millimeters. If you need a bolt with a similar size in metric units, you can look for an M3 or M4 bolt, which have diameters of 3 mm and 4 mm, respectively. The specific choice between M3 and M4 would depend on the exact requirement and tolerance for the application you're considering.
+
+
+
+
+Error Message: The output parameter with name 'gptresponse' on flow 'GPT-4o Response'('33f7ea65-0f17-f011-9989-7c1e5265170a') is missing from the response data. Please refresh the flow, or ensure the flow returns this value. Error Code: FlowActionException
+
+Conversation Id: 291e08e5-4f2d-4a01-8d81-0f1b9cfc6119 Time (UTC): 2025-04-11T20:04:38.616Z
