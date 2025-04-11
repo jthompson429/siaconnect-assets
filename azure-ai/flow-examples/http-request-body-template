@@ -23,3 +23,7 @@ To keep it simple for now:
 	1.	Add a Compose action after HTTP
 	2.	Set the input to:
 body('HTTP')?['choices']?[0]?['message']?['content']
+
+
+
+A 1/8 inch bolt has a diameter of approximately 3.175 millimeters. If you need a bolt with a similar size in metric units, you can look for an M3 or M4 bolt, which have diameters of 3 mm and 4 mm, respectively. The specific choice between M3 and M4 would depend on the exact requirement and tolerance for the application you're considering.
