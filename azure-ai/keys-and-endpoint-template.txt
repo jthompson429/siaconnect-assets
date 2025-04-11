@@ -1,0 +1,5 @@
+# Azure OpenAI Secure Config (Do not check in actual keys)
+
+ENDPOINT=https://your-resource-name.openai.azure.com/
+DEPLOYMENT_NAME=SIA_GPT4o
+API_KEY=your-api-key-here
