@@ -1,0 +1,39 @@
+- kind: Question
+  id: question_kbSearchQuery
+
+  variable: init:Topic.searchQuery
+  value: =turn.activity.text
+  prompt:
+    text:
+      - ""
+    attachments:
+      - kind: AdaptiveCardTemplate
+        cardContent: |-
+          ={
+            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+            "type": "AdaptiveCard",
+            "version": "1.5",
+            "body": [
+              {
+                "type": "Image",
+                "url": "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/kb-search.png",
+                "size": "Stretch",
+                "altText": "Knowledge Base Search"
+              },
+              {
+                "type": "TextBlock",
+                "text": "📘 Knowledge Base",
+                "size": "Large",
+                "weight": "Bolder",
+                "horizontalAlignment": "Center",
+                "spacing": "Medium"
+              },
+              {
+                "type": "TextBlock",
+                "text": "What topic, issue, or product would you like to search the knowledge base for?",
+                "wrap": true,
+                "spacing": "Medium"
+              }
+            ]
+          }
+  entity: StringPrebuiltEntity
