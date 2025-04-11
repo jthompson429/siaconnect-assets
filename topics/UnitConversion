@@ -1,59 +1,77 @@
-Topic Name:
+kind: AdaptiveDialog
+modelDescription: This topic is triggered when a users asks, "convert inches to millimeters", "convert metric to sae", "what is the metric size for 1/8"", "metric equivalent of 3/16", "sae conversion for 6mm", "size converter", "bolt size in metric", "help with measurements".
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  priority: 1
+  intent:
+    triggerQueries:
+      - convert inches to millimeters
+      - convert metric to sae
+      - what is the metric size for 1/8"
+      - metric equivalent of 3/16"
+      - sae conversion for 6mm
+      - size converter
+      - bolt size in metric
+      - help with measurements
 
-UnitConversion
+  actions:
+    - kind: Question
+      id: question_xyvmx9
+      interruptionPolicy:
+        allowInterruption: true
 
-Trigger Phrases:
-- convert inches to millimeters
-- convert metric to sae
-- what is the metric size for 1/8”
-- metric equivalent of 3/16”
-- sae conversion for 6mm
-- size converter
-- bolt size in metric
-- help with measurements
+      variable: init:Topic.query
+      prompt:
+        text:
+          - 
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              ={
+                '$schema': "http://adaptivecards.io/schemas/adaptive-card.json",
+                type: "AdaptiveCard",
+                version: "1.5",
+                body: [
+                  {
+                    type: "Image",
+                    url: "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/unit-conversion.png",
+                    size: "Stretch",
+                    altText: "Unit Conversion"
+                  },
+                  {
+                    type: "TextBlock",
+                    text: "🔩 SAE <-> Metric",
+                    size: "Large",
+                    weight: "Bolder",
+                    horizontalAlignment: "Center",
+                    spacing: "Medium"
+                  },
+                  {
+                    type: "TextBlock",
+                    text: "What unit or size would you like me to convert?",
+                    spacing: "Medium"
+                  }
+                ]
+              }
 
-Goal:
+      entity: StringPrebuiltEntity
 
-Allow users to type phrases like:
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_6OVRu7
+      input:
+        binding:
+          text: =Topic.query
 
-“What’s the metric size for a 1/8 inch bolt?”
+      output:
+        binding:
+          gptresponse: Topic.gptResponse
 
-And SIAConnect will respond with:
+      flowId: 33f7ea65-0f17-f011-9989-7c1e5265170a
 
-“Great question! The approximate metric equivalent of 1/8” is 3.18 mm.”
+    - kind: SendActivity
+      id: sendActivity_wcZtLi
+      activity: "{Topic.gptResponse}"
 
-Step-by-Step Build in Copilot Studio:
-
-1. Create a New Topic
-	•	Name: Unit Conversion
-	•	Add trigger phrases above
-
-2. Add a Question Node
-Prompt: What unit or size would you like me to convert?
-Variable: init:Topic.ConversionQuery
-Entity Type: String
-
-3. Call Power Automate Flow (recommended for flexibility)
-
-Flow Name: ConvertUnitsFlow
-
-Inputs:
-{
-  "query": "Topic.ConversionQuery"
-}
-
-4. Power Automate Flow Logic:
-	•	Use a Switch or Contains logic to match known SAE or metric sizes (e.g., 1/8", 3mm, etc.)
-	•	Create a conversion table (JSON object or Excel table in OneDrive)
-	•	Return a friendly string like:
-The metric equivalent of 1/8” is approximately 3.18mm.
-
-5. Return Result Back to Copilot
-
-Return to variable: Topic.ConvertedResult
-
-Response Node (Final):
-SendActivity:
-Great question! {Topic.ConvertedResult}
-
-Let me know if you’d like to convert another size.
+inputType: {}
+outputType: {}
