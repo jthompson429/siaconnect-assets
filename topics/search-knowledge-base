@@ -1,39 +1,103 @@
-- kind: Question
-  id: question_kbSearchQuery
+kind: AdaptiveDialog
+modelDescription: "This tool can handle queries like: 'how do I', 'what is', 'search for', or 'find information about' to retrieve structured knowledge base results."
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  priority: 1
+  intent:
+    triggerQueries:
+      - search knowledge base
+      - find KB article
+      - search for a guide
+      - find status code explanation
+      - help with error code
+      - get info from KB
+      - look up solution
+      - knowledge base search
+      - find info on product
 
-  variable: init:Topic.searchQuery
-  value: =turn.activity.text
-  prompt:
-    text:
-      - ""
-    attachments:
-      - kind: AdaptiveCardTemplate
-        cardContent: |-
-          ={
-            "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-            "type": "AdaptiveCard",
-            "version": "1.5",
-            "body": [
-              {
-                "type": "Image",
-                "url": "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/kb-search.png",
-                "size": "Stretch",
-                "altText": "Knowledge Base Search"
-              },
-              {
-                "type": "TextBlock",
-                "text": "📘 Knowledge Base",
-                "size": "Large",
-                "weight": "Bolder",
-                "horizontalAlignment": "Center",
-                "spacing": "Medium"
-              },
-              {
-                "type": "TextBlock",
-                "text": "What topic, issue, or product would you like to search the knowledge base for?",
-                "wrap": true,
-                "spacing": "Medium"
+  actions:
+    - kind: Question
+      id: question_kbSearchQuery
+      variable: init:Topic.searchQuery
+      value: =turn.activity.text
+      prompt:
+        text:
+          - ""
+        attachments:
+          - kind: AdaptiveCardTemplate
+            cardContent: |-
+              ={
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "type": "AdaptiveCard",
+                "version": "1.5",
+                "body": [
+                  {
+                    "type": "Image",
+                    "url": "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/main/banners/kb-search.png",
+                    "size": "Stretch",
+                    "altText": "Knowledge Base Search"
+                  },
+                  {
+                    "type": "TextBlock",
+                    "text": "📘 Knowledge Base",
+                    "size": "Large",
+                    "weight": "Bolder",
+                    "horizontalAlignment": "Center",
+                    "spacing": "Medium"
+                  },
+                  {
+                    "type": "TextBlock",
+                    "text": "What topic, issue, or product would you like to search the knowledge base for?",
+                    "wrap": true,
+                    "spacing": "Medium"
+                  }
+                ]
               }
-            ]
-          }
-  entity: StringPrebuiltEntity
+      entity: StringPrebuiltEntity
+
+    - kind: InvokeFlowAction
+      id: invoke_kbSearchFlow
+      input:
+        binding:
+          query: =Topic.searchQuery
+      output:
+        binding:
+          kbresults: Topic.kbResults
+      flowId: your-flow-id-goes-here
+
+    - kind: ConditionGroup
+      id: condition_resultsExist
+      conditions:
+        - id: hasResults
+          condition: =!IsBlank(Topic.kbResults)
+          actions:
+            - kind: SendActivity
+              id: sendResults
+              activity: =Topic.kbResults
+
+      elseActions:
+        - kind: SendActivity
+          id: noResults
+          activity: "I couldn’t find anything that matched your search. Want to try a different topic or keyword?"
+
+    - kind: Question
+      id: askAnother
+      variable: init:Topic.askAgain
+      prompt:
+        text:
+          - "Would you like to search for something else?"
+      entity: BooleanPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: condition_askAgain
+      conditions:
+        - id: answerYes
+          condition: =Topic.askAgain = true
+          actions:
+            - kind: GotoAction
+              actionId: question_kbSearchQuery
+        
+      elseActions:
+        - kind: BeginDialog
+          dialog: cr144_siaNow.topic.StartOver
