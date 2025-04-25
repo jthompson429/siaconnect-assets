@@ -1,0 +1,1 @@
+GloryFacts Topic
