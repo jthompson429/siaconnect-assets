@@ -128,7 +128,7 @@ beginDialog:
 
     - kind: SendActivity
       id: sendActivity_eGG7f2
-      activity:
+      activity: "{Topic.predictionOutput.text}"
 
 inputType:
   properties:
