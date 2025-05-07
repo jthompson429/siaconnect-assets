@@ -1,0 +1,155 @@
+kind: AdaptiveDialog
+modelDescription: |-
+  Description:
+
+  This topic helps users search the KBData Dataverse knowledge base table for information. Users can ask direct questions like "how do I clear a note jam?" or use keywords such as "search knowledge base" or "find an article" to retrieve relevant information.
+
+  Trigger Phrases:
+
+  Direct questions about specific issues, e.g., "how do I clear a note jam?"
+  Keywords related to searching the knowledge base, e.g., "search knowledge base," "find an article," "knowledge base search," "help with access points."
+  Functionality: When a user initiates a query, the topic will:
+
+  Capture the user's input.
+  Search the Dataverse KBData knowledge base table for relevant information.
+  Provide a response with details from the knowledge base, such as troubleshooting steps, error code explanations, or links to detailed documents.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  priority: 2
+  intent:
+    triggerQueries:
+      - knowledge base
+      - search knowledge base
+      - find KB article
+      - search for a guide
+      - find status code explanation
+      - help with error code
+      - get info from KB
+      - look up solution
+      - knowledge base search
+      - find info on product
+
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: askKbSearch
+      interruptionPolicy:
+        allowInterruption: false
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "Image",
+              "url": "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/kbsearch-banner.png",
+              "altText": "Knowledge Base Search"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Knowledge Base",
+              "weight": "Bolder",
+              "horizontalAlignment": "Center",
+              "wrap": true,
+              "style": "heading",
+              "color": "Default"
+            },
+            {
+              "type": "Input.Text",
+              "label": "What topic, issue, or product would you like to search the knowledge base for?",
+              "placeholder": "Search",
+              "id": "kbSearch"
+            },
+            {
+              "type": "ActionSet",
+              "horizontalAlignment": "Center",
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "Search",
+                  "id": "kbQuerySubmit",
+                  "style": "positive",
+                  "iconUrl": "icon:SearchInfo"
+                }
+              ]
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+          kbSearch: Topic.kbSearch
+      outputType:
+        properties:
+          actionSubmitId: String
+          kbSearch: String
+
+    - kind: IfCondition
+      id: ifEmptyOrShort
+      condition: =or(empty(Topic.kbSearch), lessOrEquals(length(Topic.kbSearch), 3))
+      actions:
+        - kind: SendActivity
+          activity:
+            text: I didn’t catch enough detail to search the Knowledge Base. Could you rephrase your question or include more keywords?
+        - kind: CancelAllDialogs
+
+    - kind: SendActivity
+      id: acknowledgeSearch
+      activity:
+        text: Got it! I’m searching the Knowledge Base for: "**{Topic.kbSearch}**" — just a moment.
+
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_bMCJbu
+      latencyMessageSettings:
+        allowLatencyMessage: true
+        latencyMessage: Searching ... 
+      input:
+        binding:
+          text: =Topic.kbSearch
+      output:
+        binding:
+          filteredarticles: Topic.FilteredArticles
+      flowId: f3e5812a-612b-f011-8c4e-7c1e5265170a
+
+    - kind: InvokeAIBuilderModelAction
+      id: SummarizeFilteredArticles
+      latencyMessageSettings:
+        allowLatencyMessage: false
+      input:
+        binding:
+          FilteredArticles: =Topic.FilteredArticles
+      output:
+        binding:
+          aiSummary: Topic.aiSummary
+      aIModelId: 2197484c-8345-4556-ba0a-fd8daacc1a1c
+
+    - kind: SendActivity
+      id: sendSummaryIntro
+      activity:
+        text: Here's what I found using our AI-powered knowledge search:
+
+    - kind: SendActivity
+      id: sendSummaryOutput
+      activity:
+        text: =Topic.aiSummary.text
+
+    - kind: ChoiceInput
+      id: askFollowUp
+      prompt: Would you like to search for another Knowledge Base article?
+      choices:
+        - title: Yes, search again
+          value: yes
+        - title: No, I’m good
+          value: no
+      property: Topic.kbFollowUpChoice
+
+    - kind: IfCondition
+      condition: =equals(Topic.kbFollowUpChoice, 'yes')
+      actions:
+        - kind: RestartDialog
+          dialog: main
+      elseActions:
+        - kind: SendActivity
+          activity:
+            text: Got it. Let me know if there’s anything else I can help with!
