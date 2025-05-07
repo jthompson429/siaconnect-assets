@@ -95,21 +95,40 @@ beginDialog:
           actionSubmitId: String
           kbSearch: String
 
-    - kind: InvokeAIBuilderModelAction
-      id: invokeAIBuilderModelAction_R0BNkI
+    - kind: InvokeFlowAction
+      id: invokeFlowAction_bMCJbu
       latencyMessageSettings:
         allowLatencyMessage: true
-        latencyMessage: Searching knowledge base ...
+        latencyMessage: Searching ... 
 
       input:
         binding:
-          kbSearch: =Topic.kbSearch
+          text: =Topic.kbSearch
+
+      output:
+        binding:
+          filteredarticles: Topic.FilteredArticles
+
+      flowId: f3e5812a-612b-f011-8c4e-7c1e5265170a
+
+    - kind: InvokeAIBuilderModelAction
+      id: SummarizeFilteredArticles
+      latencyMessageSettings:
+        allowLatencyMessage: false
+
+      input:
+        binding:
+          FilteredArticles: =Topic.FilteredArticles
 
       output:
         binding:
           predictionOutput: Topic.predictionOutput
 
       aIModelId: 2197484c-8345-4556-ba0a-fd8daacc1a1c
+
+    - kind: SendActivity
+      id: sendActivity_eGG7f2
+      activity:
 
 inputType:
   properties:
