@@ -1,0 +1,180 @@
+kind: AdaptiveDialog
+modelDescription: |-
+  Description:
+  
+  This topic helps users search the KBData Dataverse knowledge base table for information. Users can ask direct questions like "how do I clear a note jam?" or use keywords such as "search knowledge base" or "find an article" to retrieve relevant information.
+  
+  Trigger Phrases:
+  
+  Direct questions about specific issues, e.g., "how do I clear a note jam?"
+  Keywords related to searching the knowledge base, e.g., "search knowledge base," "find an article," "knowledge base search," "help with access points."
+  Functionality: When a user initiates a query, the topic will:
+  
+  Capture the user's input.
+  Search the Dataverse KBData knowledge base table for relevant information.
+  Provide a response with details from the knowledge base, such as troubleshooting steps, error code explanations, or links to detailed documents.
+  Example User Queries:
+  
+  "How do I clear a note jam?"
+  "Search knowledge base for troubleshooting steps."
+  "Find an article on quantum status codes."
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  priority: 2
+  intent:
+    triggerQueries:
+      - knowledge base
+      - search knowledge base
+      - find KB article
+      - search for a guide
+      - find status code explanation
+      - help with error code
+      - get info from KB
+      - look up solution
+      - knowledge base search
+      - find info on product
+
+  actions:
+    - kind: AdaptiveCardPrompt
+      id: QBucoC
+      interruptionPolicy:
+        allowInterruption: false
+
+      card: |-
+        {
+          "type": "AdaptiveCard",
+          "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+          "version": "1.5",
+          "body": [
+            {
+              "type": "Image",
+              "url": "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/kbsearch-banner.png",
+              "altText": "Knowledge Base Search"
+            },
+            {
+              "type": "TextBlock",
+              "text": "Knowledge Base",
+              "weight": "Bolder",
+              "horizontalAlignment": "Center",
+              "height": "stretch",
+              "wrap": true,
+              "style": "heading",
+              "color": "Default"
+            },
+            {
+              "type": "Input.Text",
+              "label": "What topic, issue, or product would you like to search the knowledge base for?",
+              "placeholder": "Search",
+              "separator": true,
+              "id": "kbSearch"
+            },
+            {
+              "type": "ActionSet",
+              "id": "kbQuery",
+              "horizontalAlignment": "Center",
+              "actions": [
+                {
+                  "type": "Action.Submit",
+                  "title": "Search",
+                  "id": "kbQuerySubmit",
+                  "style": "positive",
+                  "iconUrl": "icon:SearchInfo"
+                }
+              ]
+            }
+          ]
+        }
+      output:
+        binding:
+          actionSubmitId: Topic.actionSubmitId
+          kbSearch: Topic.kbSearch
+
+      outputType:
+        properties:
+          actionSubmitId: String
+          kbSearch: String
+
+    - kind: InvokeAIBuilderModelAction
+      id: invokeAIBuilderModelAction_R0BNkI
+      latencyMessageSettings:
+        allowLatencyMessage: true
+        latencyMessage: Searching knowledge base ...
+
+      input:
+        binding:
+          kbSearch: =Topic.kbSearch
+
+      output:
+        binding:
+          predictionOutput: Topic.predictionOutput
+
+      aIModelId: 2197484c-8345-4556-ba0a-fd8daacc1a1c
+
+inputType:
+  properties:
+    kbSearch:
+      displayName: kbSearch
+      type: String
+
+    predictionOutput:
+      displayName: predictionOutput
+      type:
+        kind: Record
+        properties:
+          dataUsed:
+            displayName: Data Used
+            order: 2
+            type: String
+
+          finishReason:
+            displayName: Finish Reason
+            order: 0
+            type: String
+
+          text:
+            displayName: Text
+            order: 1
+            type: String
+
+    predictionOutput.finishReason:
+      displayName: predictionOutput.finishReason
+      type: String
+
+    predictionOutput.text:
+      displayName: predictionOutput.text
+      type: String
+
+outputType:
+  properties:
+    kbSearch:
+      displayName: kbSearch
+      type: String
+
+    predictionOutput:
+      displayName: predictionOutput
+      type:
+        kind: Record
+        properties:
+          dataUsed:
+            displayName: Data Used
+            order: 2
+            type: String
+
+          finishReason:
+            displayName: Finish Reason
+            order: 0
+            type: String
+
+          text:
+            displayName: Text
+            order: 1
+            type: String
+
+    predictionOutput.finishReason:
+      displayName: predictionOutput.finishReason
+      type: String
+
+    predictionOutput.text:
+      displayName: predictionOutput.text
+      type: String
