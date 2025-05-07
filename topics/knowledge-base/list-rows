@@ -1,1 +1,7 @@
-a
+Compose step: EscapedSearch
+replace(triggerBody()['kbSearch'],'''','''''')
+
+filter query:
+contains(Title,'@{outputs('EscapedSearch')}') or
+contains(Tag,'@{outputs('EscapedSearch')}') or
+contains(Category,'@{outputs('EscapedSearch')}')
