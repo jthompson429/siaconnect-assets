@@ -27,6 +27,12 @@ Your task:
 - Add a **blank line above and below each divider** to ensure clear separation in Teams
 - Do NOT write out escape characters (like `\\n`)—use actual spacing
 
+Example Output:
+Title: F601 Error Status
+Summary of article content here…
+Tags: Sensor, Jam Clearance
+Related Links:
+Troubleshooting Guide
 ---
 
 If only one article is relevant, return just that one.  
