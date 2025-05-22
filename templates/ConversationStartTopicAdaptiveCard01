@@ -5,7 +5,7 @@
   body: [
     {
       type: "Image",
-      url: "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/welcome.png",
+      url: "https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/welcome-banner.png",
       size: "Stretch",
       altText: "SIAConnect"
     },
@@ -19,13 +19,13 @@
     },
     {
       type: "TextBlock",
-      text: "I’m *SIAConnect*, *your* document and knowledge assistant. I can help you find documents, knowledge base articles, and videos, or assist with document requests.",
+      text: "I’m here to help you find what you need - fast.",
       spacing: "medium",
       wrap: true
     },
     {
       type: "TextBlock",
-      text: "You can type in what you would like to do, or choose from one of the suggestions.",
+      text: "Whether it's a document, knowledge article, training video, or a new document request, I've got it handled. You can just type your question, or use the options below to get started.",
       spacing: "medium",
       wrap: true
     }
