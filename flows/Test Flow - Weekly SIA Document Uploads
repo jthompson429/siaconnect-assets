@@ -1,24 +1,28 @@
-<img src="https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/sia-email-announcement-doc-650x150.png" alt="SIAConnect Document Update Banner" style="width:650px; max-width:100%; margin-bottom:20px;" />
+<img src="https://raw.githubusercontent.com/jthompson429/siaconnect-assets/refs/heads/main/banners/sia-email-announcement-doc-650x150.png" alt="SIAConnect Document Update Banner" style="width:650px; max-width:100%; margin-bottom:20px;">
 
-<p style="font-family: Arial, sans-serif; font-size: 14px;">Hello everyone,</p>
+<p style="font-family: Arial, sans-serif; font-size: 14px;">Happy Friday, everyone!</p>
 
 <p style="font-family: Arial, sans-serif; font-size: 14px;">
-Here are the documents uploaded to <strong>SIA North America</strong> for the week of 
+Here's what all is new to <strong>SIA North America</strong> for the week of 
 <strong>@{addDays(utcNow(), -7, 'MM/dd/yyyy')} – @{formatDateTime(utcNow(), 'MM/dd/yyyy')}</strong>.
 </p>
-
-@{variables('documentList')}
-
-<<p style="font-family: Arial, sans-serif; font-size: 12px; color: #555;">
+<p style="font-family: Arial, sans-serif; font-size: 12px; color: #555;">
 <em>Note: Access to some documents may be restricted based on your SIA viewing permissions. Document types such as ECNs are not accessible to Field and Help Desk teams.</em>
 </p>
+<hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;">
+@{variables('documentList')}
+
+
 <hr style="border: none; border-top: 1px solid #ccc; margin: 30px 0;">
 <p style="font-family: Arial, sans-serif; font-size: 14px;">Kind regards,</p>
 
 <p style="font-family: Arial, sans-serif; font-size: 14px; color: #111987;">
-NAM Content Management<br>
-<span style="font-weight: bold;">GLORY</span><br>
-<span style="font-size: 12px;">Content Management | <a href="mailto:Content.Management@us.glory-global.com" style="color: #0563C2;">Content.Management@us.glory-global.com</a> | <a href="http://www.glory-global.com/" style="color: #0563C2;">www.glory-global.com</a></span><br>
+NAM Content Management
+
+<span style="font-weight: bold;">GLORY</span>
+
+<span style="font-size: 12px;">Content Management | <a href="mailto:Content.Management@us.glory-global.com" style="color: #0563C2;">Content.Management@us.glory-global.com</a> | <a href="http://www.glory-global.com/" style="color: #0563C2;">www.glory-global.com</a></span>
+
 <span style="font-size: 12px;">Follow us on <a href="#" style="color: #0563C2;">LinkedIn</a>, <a href="#" style="color: #0563C2;">Facebook</a>, <a href="#" style="color: #0563C2;">YouTube</a></span>
 </p>
 
@@ -29,17 +33,20 @@ NAM Content Management<br>
 <p style="font-family: Arial, sans-serif; font-size: 11px; color: #6D6D6D;">
 Please consider the environment before printing this email.
 </p>
+
+
+
 New ---
 <div style="margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 14px;">
-  <strong>@{items('Apply_to_each')?['Title']}</strong><br/>
-  <a href="@{items('Apply_to_each')?['Link']}">@{items('Apply_to_each')?['Name']}</a>
-  <ul style="margin-top: 8px; margin-bottom: 0;">
-    <li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')}</li>
-    <li><strong>Directory:</strong> @{items('Apply_to_each')?['Path']}</li>
-    <li><strong>Type:</strong> @{items('Apply_to_each')?['Label']}</li>
-    <li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li>
-  </ul>
+<strong>@{items('Apply_to_each')?['Title']} - <a href="@{items('Apply_to_each')?['{Link}']}">@{items('Apply_to_each')?['{Name}']}</a></strong>
+<li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')
+}</li>
+<li><strong>Directory:</strong> @{items('Apply_to_each')?['{Path}']}</li>
+<li><strong>Type:</strong> @{items('For_each')?['Label']}</li>
+<li><strong>Product or Audience</strong>@{items('For_each_1')?['Label']}</li>
+<li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li>
 </div>
+
 
 
 OLD ---
