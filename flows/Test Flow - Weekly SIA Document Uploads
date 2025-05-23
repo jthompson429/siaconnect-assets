@@ -107,5 +107,45 @@ OLD ---
   }
 }
 
-
-{"nodeId":"Apply_to_each-copy","serializedValue":{"type":"Foreach","foreach":"@outputs('Get_files_(properties_only)')?['body/value']","actions":{"For_each":{"type":"Foreach","foreach":"@outputs('Get_files_(properties_only)')?['body/value']","actions":{"Append_to_string_variable":{"type":"AppendToStringVariable","inputs":{"name":"documentList","value":"<div style='margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 14px;'><strong>@{items('Apply_to_each')?['Title']}</strong><br/><a href='@{items('Apply_to_each')?['Link']}'>@{items('Apply_to_each')?['Name']}</a><ul><li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')}</li><li><strong>Directory:</strong> @{items('Apply_to_each')?['Path']}</li><li><strong>Type:</strong> @{outputs('Compose_CPLabels')}</li><li><strong>Product or Audience:</strong> @{outputs('Compose_GGLabels')}</li><li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li></ul></div>\n"}}},"runAfter":{"Compose_GGLabels":["Succeeded"]}},"Compose_CPLabels":{"type":"Compose","inputs":"@join(select(items('Apply_to_each')?['CPDocumentType'], item()?['Label']), ', ')"},"Compose_GGLabels":{"type":"Compose","inputs":"@join(select(items('Apply_to_each')?['GGProduct'], item()?['Label']), ', ')","runAfter":{"Compose_CPLabels":["Succeeded"]}}},"runAfter":{"Initialize_variable":["Succeeded"]}},"allConnectionData":{},"staticResults":{},"isScopeNode":true,"mslaNode":true}
+{
+  "type": "Foreach",
+  "foreach": "@outputs('Get_files_(properties_only)')?['body/value']",
+  "actions": {
+    "For_each": {
+      "type": "Foreach",
+      "foreach": "@outputs('Get_files_(properties_only)')?['body/value']",
+      "actions": {
+        "Append_to_string_variable": {
+          "type": "AppendToStringVariable",
+          "inputs": {
+            "name": "documentList",
+            "value": "<div style='margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 14px;'><strong>@{items('Apply_to_each')?['Title']}</strong><br/><a href='@{items('Apply_to_each')?['Link']}'>@{items('Apply_to_each')?['Name']}</a><ul><li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')}</li><li><strong>Directory:</strong> @{items('Apply_to_each')?['Path']}</li><li><strong>Type:</strong> @{outputs('Compose_CPLabels')}</li><li><strong>Product or Audience:</strong> @{outputs('Compose_GGLabels')}</li><li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li></ul></div>\n"
+          }
+        }
+      },
+      "runAfter": {
+        "Compose_GGLabels": [
+          "Succeeded"
+        ]
+      }
+    },
+    "Compose_CPLabels": {
+      "type": "Compose",
+      "inputs": "@join(select(items('Apply_to_each')?['CPDocumentType'], item()?['Label']), ', ')"
+    },
+    "Compose_GGLabels": {
+      "type": "Compose",
+      "inputs": "@join(select(items('Apply_to_each')?['GGProduct'], item()?['Label']), ', ')",
+      "runAfter": {
+        "Compose_CPLabels": [
+          "Succeeded"
+        ]
+      }
+    }
+  },
+  "runAfter": {
+    "Initialize_variable": [
+      "Succeeded"
+    ]
+  }
+}
