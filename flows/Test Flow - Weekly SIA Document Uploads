@@ -29,3 +29,12 @@ NAM Content Management<br>
 <p style="font-family: Arial, sans-serif; font-size: 11px; color: #6D6D6D;">
 Please consider the environment before printing this email.
 </p>
+
+
+<strong>@{items('Apply_to_each')?['Title']} - <a href="@{items('Apply_to_each')?['{Link}']}">@{items('Apply_to_each')?['{Name}']}</a></strong>
+<li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')
+}</li>
+<li><strong>Directory:</strong> @{items('Apply_to_each')?['{Path}']}</li>
+<li><strong>Type:</strong> @{items('For_each')?['Label']}</li>
+<li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li>
+<p><br/><br/></p>
