@@ -62,3 +62,46 @@ OLD ---
 {"nodeId":"Apply_to_each-copy","serializedValue":{"type":"Foreach","foreach":"@outputs('Get_files_(properties_only)')?['body/value']","actions":{"For_each":{"type":"Foreach","foreach":"@items('Apply_to_each')?['CPDocumentType']","actions":{"Append_to_string_variable":{"type":"AppendToStringVariable","inputs":{"name":"documentList","value":"<div style=\"margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 14px;\">\n<strong>@{items('Apply_to_each')?['Title']} - <a href=\"@{items('Apply_to_each')?['{Link}']}\">@{items('Apply_to_each')?['{Name}']}</a></strong>\n<li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')\n}</li>\n<li><strong>Directory:</strong> @{items('Apply_to_each')?['{Path}']}</li>\n<li><strong>Type:</strong> @{items('For_each')?['Label']}</li>\n<li><strong>Product or Audience</strong>: </li>\n<li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li>\n</div>\n"}}}}},"runAfter":{"Initialize_variable":["Succeeded"]}},"allConnectionData":{},"staticResults":{},"isScopeNode":true,"mslaNode":true}
 
 {"nodeId":"Apply_to_each-copy","serializedValue":{"type":"Foreach","foreach":"@outputs('Get_files_(properties_only)')?['body/value']","actions":{"For_each":{"type":"Foreach","foreach":"@{items('Apply_to_each')?['CPDocumentType']}@{items('Apply_to_each')?['GGProduct']}","actions":{"For_each_2":{"type":"foreach","foreach":"@outputs('Get_files_(properties_only)')?['body/value']","actions":{"For_each_1":{"type":"foreach","foreach":"@items('Apply_to_each')?['GGProduct']","actions":{"Append_to_string_variable":{"type":"AppendToStringVariable","inputs":{"name":"documentList","value":"<div style=\"margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 14px;\">\n<strong>@{items('Apply_to_each')?['Title']} - <a href=\"@{items('Apply_to_each')?['{Link}']}\">@{items('Apply_to_each')?['{Name}']}</a></strong>\n<li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')\n}</li>\n<li><strong>Directory:</strong> @{items('Apply_to_each')?['{Path}']}</li>\n<li><strong>Type:</strong> @{items('For_each')?['Label']}</li>\n<li><strong>Product or Audience</strong>: @{items('For_each_1')?['Label']}</li>\n<li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li>\n</div>\n"}}}}}}}}},"runAfter":{"Initialize_variable":["Succeeded"]}},"allConnectionData":{},"staticResults":{},"isScopeNode":true,"mslaNode":true}
+
+
+
+--- Compose
+
+
+{
+  "name": "SIAConnect_WeeklyDocEmail",
+  "definition": {
+    "description": "Power Automate flow to compile weekly SharePoint uploads with product and type labels.",
+    "triggers": [
+      {
+        "recurrence": {
+          "frequency": "Week",
+          "interval": 1
+        }
+      }
+    ],
+    "actions": [
+      {
+        "type": "Apply_to_each",
+        "foreach": "@outputs('Get_files_(properties_only)')?['body/value']",
+        "actions": {
+          "Compose_CPLabels": {
+            "type": "Compose",
+            "inputs": "@join(select(items('Apply_to_each')?['CPDocumentType'], item()?['Label']), ', ')"
+          },
+          "Compose_GGLabels": {
+            "type": "Compose",
+            "inputs": "@join(select(items('Apply_to_each')?['GGProduct'], item()?['Label']), ', ')"
+          },
+          "Append_to_string_variable": {
+            "type": "AppendToStringVariable",
+            "inputs": {
+              "name": "documentList",
+              "value": "<div style='margin-bottom: 20px; font-family: Arial, sans-serif; font-size: 14px;'><strong>@{items('Apply_to_each')?['Title']}</strong><br/><a href='@{items('Apply_to_each')?['Link']}'>@{items('Apply_to_each')?['Name']}</a><ul><li><strong>Uploaded:</strong> @{formatDateTime(items('Apply_to_each')?['CPDate'], 'MM-dd-yyyy')}</li><li><strong>Directory:</strong> @{items('Apply_to_each')?['Path']}</li><li><strong>Type:</strong> @{outputs('Compose_CPLabels')}</li><li><strong>Product or Audience:</strong> @{outputs('Compose_GGLabels')}</li><li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li></ul></div>"
+            }
+          }
+        }
+      }
+    ]
+  }
+}
