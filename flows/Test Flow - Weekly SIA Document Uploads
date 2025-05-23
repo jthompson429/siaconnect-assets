@@ -43,7 +43,7 @@ New ---
 }</li>
 <li><strong>Directory:</strong> @{items('Apply_to_each')?['{Path}']}</li>
 <li><strong>Type:</strong> @{items('For_each')?['Label']}</li>
-<li><strong>Product or Audience</strong>@{items('For_each_1')?['Label']}</li>
+<li><strong>Product or Audience:</strong> @{items('For_each_1')?['Label']}</li>
 <li><strong>Summary:</strong> @{items('Apply_to_each')?['CPSummary']}</li>
 </div>
 
